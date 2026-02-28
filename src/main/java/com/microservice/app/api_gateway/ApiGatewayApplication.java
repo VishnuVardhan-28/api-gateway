@@ -20,6 +20,8 @@ public class ApiGatewayApplication {
                         .uri("lb://product-service"))
                 .route("order-service", r -> r.path("/api/order/**")
                         .uri("lb://order-service"))
+                .route("inventory-service", r -> r.path("/api/inventory/**")
+                        .uri("lb://inventory-service"))
                 .route("discovery-server",r -> r.path("/eureka/web").filters(f -> f.setPath("/"))
                         .uri("http://localhost:8761"))
                 .route("discovery-server-static",r -> r.path("/eureka/**")
