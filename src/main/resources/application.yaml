@@ -1,9 +1,8 @@
 spring:
   application:
     name: api-gateway
-
-
-
+  reactor:
+    context-propagation: auto
 eureka:
   instance:
     hostname: localhost
@@ -18,3 +17,15 @@ logging:
     root: INFO
     org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
     org.springframework.cloud.gateway: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] %m%n"
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      type: "w3c,b3"
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
